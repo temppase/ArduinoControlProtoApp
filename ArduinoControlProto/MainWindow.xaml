@@ -1,0 +1,36 @@
+﻿<Window x:Class="ArduinoControlProto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArduinoControlProto"
+        WindowStyle="ToolWindow"
+        mc:Ignorable="d" FontSize="18" Background="Black" Foreground="Gray"
+        Title="Arduino Ethernet Control" Height="500" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button VerticalAlignment="Top" x:Name="Info" Click="Info_Click" MouseEnter="Info_MouseEnter">
+            Info
+        </Button>
+        <Button VerticalAlignment="Top" Margin="0,30,0,0" x:Name="Parameters" Click="Parameters_Click" MouseEnter="Parameters_MouseEnter">
+            Parameters
+        </Button>
+        <Button VerticalAlignment="Top" Margin="0,60,0,0" x:Name="Setup" Click="Setup_Click" MouseEnter="Setup_MouseEnter">
+            Setup
+        </Button>
+        <Button VerticalAlignment="Top" Margin="0,90,0,0" x:Name="Reset" Click="Reset_Click" Background="DarkSalmon" MouseEnter="Reset_MouseEnter">
+            Reset
+        </Button>
+        <Button VerticalAlignment="Top" x:Name="Restart" Click="Restart_Click" Background="Red" MouseEnter="Restart_MouseEnter">
+            Restart
+        </Button>
+        <TextBlock Margin="0,120,0,0" x:Name="Information" Background="LightGray" Foreground="Black"
+                   TextWrapping="Wrap" Padding="10,5,5,5" MouseEnter="Information_MouseEnter"/>
+        <TextBlock Margin="0,30,0,0" x:Name="Fill" Background="LightGray" Foreground="Black"
+                   TextWrapping="Wrap" Padding="10,5,5,5"/>
+        <ScrollViewer x:Name="View" Grid.Column="1" Padding="10" MouseEnter="View_MouseEnter"/>
+    </Grid>
+</Window>
