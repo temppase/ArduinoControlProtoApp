@@ -15,6 +15,8 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" x:Name="Header" TextAlignment="Center" FontWeight="Bold"
                    Background="DarkCyan" Foreground="Black" FontSize="18" Padding="10,5,5,5"/>
+        <Button Grid.Row="2" Width="120" Margin="0,0,500,0" Content="Check point" 
+                Background="DarkSalmon" x:Name="RefPoint" Click="RefPoint_Click"/>
         <Slider Grid.Row="2" x:Name="Sledge_position" Minimum="0" Maximum="360" TickFrequency="5" 
                 ValueChanged="Sledge_ValueChanged" TickPlacement="BottomRight" PreviewMouseUp="Sledge_MouseUp"/>
         <TextBlock Grid.Row="3" x:Name="Content" TextWrapping="Wrap" Padding="10,5,5,5"/>

@@ -32,7 +32,7 @@ namespace ArduinoControlProto
             {
                 Restart.Visibility = Visibility.Visible;
                 Fill.Visibility = Visibility.Visible;
-                Information.Visibility = Visibility.Collapsed;
+                Information.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -40,17 +40,21 @@ namespace ArduinoControlProto
                 {
                     Parameters.Visibility = Visibility.Hidden;
                     Setup.Visibility = Visibility.Hidden;
-                    Debug.WriteLine("Play");
+                }
+                else if(tcp.stateCheck(tcp.SendCommand("info"), 9) == 1)
+                {
+                    Parameters.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    Parameters.Visibility = Visibility.Visible;
-                    Setup.Visibility = Visibility.Visible;
+                    Parameters.Visibility = Visibility.Hidden;
+                    Information.Text = "No reference point set";
                 }
+                Setup.Visibility = Visibility.Visible;
                 Info.Visibility = Visibility.Visible;
                 Reset.Visibility = Visibility.Visible;
-                Restart.Visibility = Visibility.Collapsed;
-                Fill.Visibility = Visibility.Collapsed;
+                Restart.Visibility = Visibility.Hidden;
+                Fill.Visibility = Visibility.Hidden;
                 Information.Visibility= Visibility.Visible;
             }
         }

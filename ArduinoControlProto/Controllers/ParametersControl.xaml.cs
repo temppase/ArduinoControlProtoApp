@@ -79,7 +79,7 @@ namespace ArduinoControlProto.Controllers
         }
         private string Data()
         {
-            string data = $"{Intervals}|{Interval_L}|{Interval_S}|{Direction}|{Offset}";
+            string data = $"{Intervals}|{Interval_L * 100}|{Interval_S}|{Direction}|{Offset}";
             return data;
         }
 
