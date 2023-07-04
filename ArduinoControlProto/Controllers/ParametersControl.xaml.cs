@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ArduinoControlProto.Controllers
 {
@@ -39,33 +40,36 @@ namespace ArduinoControlProto.Controllers
             MM.Text = "00";
             I_MM.Text = "00";
             I_SS.Text = "00";
-            TL.Text = "350";
-            SliderV.Text = "0";
+            TL.Text = "360";
+            SliderV.Text = "0 mm";
             PlayBtn.Visibility = Visibility.Hidden;
             SendBtn.Visibility = Visibility.Hidden;
         }
         private void CountBtn_Click(object sender, RoutedEventArgs e)
         {
-            Total_S = TimeSpan.Parse($"{DD.Text}:{HH.Text}:{MM.Text}:00").TotalSeconds;
-            Total_L = Convert.ToDouble(TL.Text);
-            Interval_S = TimeSpan.Parse($"00:{I_MM.Text}:{I_SS.Text}").TotalSeconds;
-            Intervals = Math.Round(Total_S / Interval_S, 0);
-            Interval_L = Math.Round(Total_L / Intervals,2);
-            if(Interval_L < 0.01)
+            if(I_count.Text == "")
             {
-                Interval_L = 0.01;
-                I_count.Text = ": " + Total_S.ToString() + " s / " + Interval_S.ToString() + " s = " 
-                    + Intervals + " Intervals";
-                L_count.Text = " Interval lenght mm: " + Interval_L + " (replaced value)";
+                Total_S = TimeSpan.Parse($"{DD.Text}:{HH.Text}:{MM.Text}:00").TotalSeconds;
+                Total_L = Convert.ToDouble(TL.Text);
+                Interval_S = TimeSpan.Parse($"00:{I_MM.Text}:{I_SS.Text}").TotalSeconds;
+                Intervals = Math.Round(Total_S / Interval_S, 0);
+                Interval_L = Math.Round(Total_L / Intervals, 2);
+                if (Interval_L < 0.01)
+                {
+                    Interval_L = 0.01;
+                    I_count.Text = ": " + Total_S.ToString() + " s / " + Interval_S.ToString() + " s = "
+                        + Intervals + " Intervals";
+                    L_count.Text = " Interval lenght mm: " + Interval_L + " (replaced value)";
+                }
+                else
+                {
+                    I_count.Text = ": " + Total_S.ToString() + " s / " + Interval_S.ToString() + " s = "
+                        + Intervals + " Intervals";
+                    L_count.Text = " Intervals, interval lenght mm: " + Interval_L;
+                }
+                SendBtn.Visibility = Visibility.Visible;
+                DirBtn.Visibility = Visibility.Visible;
             }
-            else
-            {
-                I_count.Text = ": " + Total_S.ToString() + " s / " + Interval_S.ToString() + " s = "
-                    + Intervals + " Intervals";
-                L_count.Text = " Intervals, interval lenght mm: " + Interval_L;
-            }
-            SendBtn.Visibility = Visibility.Visible;
-            DirBtn.Visibility = Visibility.Visible;
         }
         private void SendBtn_Click(Object sender, RoutedEventArgs e)
         {
@@ -75,7 +79,7 @@ namespace ArduinoControlProto.Controllers
         private void Sledge_ValueChanged(object sender, EventArgs e)
         {
             Offset = Convert.ToInt32(Math.Round(Sledge_position.Value, 0));
-            SliderV.Text = Offset.ToString();
+            SliderV.Text = Offset.ToString() + " mm";
         }
         private string Data()
         {
@@ -101,6 +105,55 @@ namespace ArduinoControlProto.Controllers
             {
                 Direction = 1;
                 DirBtn.Content = ">>";
+            }
+        }
+        private string FLC(string c)
+        {
+            if (c.Length != 2)
+            {
+                return "Field must contain 2 letters";
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        private void DD_LostFocus(object sender, RoutedEventArgs e)
+        {
+            I_count.Text = FLC(DD.Text);
+        }
+        private void ValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void HH_LostFocus(object sender, RoutedEventArgs e)
+        {
+            I_count.Text = FLC(HH.Text);
+        }
+
+        private void MM_LostFocus(object sender, RoutedEventArgs e)
+        {
+            I_count.Text = FLC(MM.Text);
+        }
+
+        private void I_MM_LostFocus(object sender, RoutedEventArgs e)
+        {
+            I_count.Text = FLC(I_MM.Text);
+        }
+
+        private void I_SS_LostFocus(object sender, RoutedEventArgs e)
+        {
+            I_count.Text = FLC(I_MM.Text);
+        }
+
+        private void TL_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(Convert.ToInt32(TL.Text) > 360)
+            {
+                I_count.Text = "Total length too long. Max 360 mm";
             }
         }
     }

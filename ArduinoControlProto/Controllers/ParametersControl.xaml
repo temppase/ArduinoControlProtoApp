@@ -35,20 +35,20 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="11" x:Name="Header" TextAlignment="Center" FontWeight="Bold"
                    Background="DarkCyan" Foreground="Black" FontSize="20" Padding="10,5,5,5"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Text="Total time:"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" Text="Total length:"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" Text="Interval time:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="DD" Padding="5,5,5,5"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Text="Total time:(DD:HH:MM)"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" Text="Total length:(mm)"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" Text="Interval time:(MM:SS)"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="DD" Padding="5,5,5,5" LostFocus="DD_LostFocus" PreviewTextInput="ValidationTextBox"/>
         <TextBlock Grid.Row="2" Grid.Column="10" x:Name="I_count" Padding="5,5,5,5"/>
         <TextBlock Grid.Row="3" Grid.Column="10" x:Name="L_count" Padding="5,5,5,5"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text=":" Padding="3,3,3,3"/>
-        <TextBox Grid.Row="2" Grid.Column="3" x:Name="HH" Padding="5,5,5,5"/>
+        <TextBox Grid.Row="2" Grid.Column="3" x:Name="HH" Padding="5,5,5,5" LostFocus="HH_LostFocus" PreviewTextInput="ValidationTextBox"/>
         <TextBlock Grid.Row="2" Grid.Column="4" Text=":" Padding="3,3,3,3"/>
-        <TextBox Grid.Row="2" Grid.Column="5" x:Name="MM" Padding="5,5,5,5"/>
-        <TextBox Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1" x:Name="TL" Padding="5,5,5,5"/>
-        <TextBox Grid.Row="6" Grid.Column="1" x:Name="I_MM" Padding="5,5,5,5"/>
+        <TextBox Grid.Row="2" Grid.Column="5" x:Name="MM" Padding="5,5,5,5" LostFocus="MM_LostFocus" PreviewTextInput="ValidationTextBox"/>
+        <TextBox Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1" x:Name="TL" Padding="5,5,5,5" LostFocus="TL_LostFocus" PreviewTextInput="ValidationTextBox"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="I_MM" Padding="5,5,5,5" LostFocus="I_MM_LostFocus" PreviewTextInput="ValidationTextBox"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text=":" Padding="3,3,3,3"/>
-        <TextBox Grid.Row="6" Grid.Column="3" x:Name="I_SS" Padding="5,5,5,5"/>
+        <TextBox Grid.Row="6" Grid.Column="3" x:Name="I_SS" Padding="5,5,5,5" LostFocus="I_SS_LostFocus" PreviewTextInput="ValidationTextBox"/>
         <Button x:Name="CountBtn" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3"
                 Click="CountBtn_Click" Content="Count"/>
         <Button x:Name="SendBtn" Grid.Column="5" Grid.Row="6" Grid.ColumnSpan="3"
@@ -58,8 +58,8 @@
         <Slider Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="11" x:Name="Sledge_position" 
                 Minimum="0" Maximum="360" TickFrequency="5" ValueChanged="Sledge_ValueChanged" 
                 TickPlacement="BottomRight"/>
-        <TextBox Grid.Row="8" Grid.Column="1" x:Name="SliderV" 
-                 Grid.ColumnSpan="2" Padding="5,5,5,5"/>
+        <TextBlock Grid.Row="8" Grid.Column="1" x:Name="SliderV" 
+                 Grid.ColumnSpan="3" Padding="5,5,5,5"/>
         <Button x:Name="PlayBtn" Grid.Column="9" Grid.Row="6"
                 Click="PlayBtn_Click" Content="Play" Background="Aquamarine"/>
     </Grid>
